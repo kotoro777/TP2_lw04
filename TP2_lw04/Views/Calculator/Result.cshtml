@@ -1,0 +1,28 @@
+﻿@model TP2_lw04.Models.CalculatorModel
+
+<h2>Result:</h2>
+<p>Operand 1: @Model.Operand1</p>
+<p>Operation: @Model.Operation</p>
+<p>Operand 2: @Model.Operand2</p>
+<p>Result: @Model.Result</p>
+
+@using (Html.BeginForm("Calculate", "Calculator", FormMethod.Post))
+{
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    
+    @if (Model.Result == ViewBag.TargetValue)
+    {
+        <p>The result is zero.</p>
+    }
+    else if (Model.Result > ViewBag.TargetValue)
+    {
+        <p>The result is positive.</p>
+    }
+    else
+    {
+        <p>The result is negative.</p>
+    }
+}
+

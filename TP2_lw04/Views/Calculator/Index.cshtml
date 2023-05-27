@@ -1,0 +1,44 @@
+﻿@model TP2_lw04.Models.CalculatorModel
+
+@{
+    ViewData["Title"] = "Calculator";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@using (Html.BeginForm("Calculate", "Calculator", FormMethod.Post))
+{
+    @Html.ActionLink("Перейти ко второму расчёту", "SecondCalculation", "Calculator")
+
+    <div>
+        @Html.LabelFor(model => model.Operand1, new { @class = "textBoxStyle" })
+        @Html.TextBoxFor(model => model.Operand1)
+        @Html.ValidationMessageFor(m => m.Operand1, "", new { @class = "field-validation-error" })
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Operation)
+        @Html.DropDownListFor(model => model.Operation, new List<SelectListItem>
+    {
+    new SelectListItem { Text = "+", Value = "+" },
+    new SelectListItem { Text = "-", Value = "-" },
+    new SelectListItem { Text = "*", Value = "*" },
+    new SelectListItem { Text = "/", Value = "/" }
+    })
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Operand2, new { @class = "textBoxStyle" })
+        @Html.TextBoxFor(model => model.Operand2)
+        @Html.ValidationMessageFor(m => m.Operand2, "", new { @class = "field-validation-error" })
+    </div>
+    <div>
+        <input type="submit" name="action" value="Calculate" />
+        <input type="submit" name="action" value="Clear" />
+    </div>
+}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
